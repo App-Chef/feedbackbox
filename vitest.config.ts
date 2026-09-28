@@ -3,7 +3,11 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   resolve: {
-    alias: { "@": path.resolve(__dirname) },
+    alias: {
+      "@": path.resolve(__dirname),
+      // Next.js provides this at build time; in tests it's a no-op.
+      "server-only": path.resolve(__dirname, "tests/stubs/empty.ts"),
+    },
   },
   test: {
     environment: "node",
