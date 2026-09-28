@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  --bg: #fafaf7;
+  --surface: #ffffff;
+  --fg: #121211;
+  --muted: #f0f0ea;
+  --muted-fg: #5f5f59;
+  --line: #121211;
+  --line-soft: #e0e0d8;
+  --accent: #ff5a1f;
+  --accent-fg: #121211;
+  --accent-soft: #ffeadf;
+  --danger: #c2371f;
+  --danger-soft: #fdecea;
+  --status-open: #ff5a1f;
+  --status-progress: #2563eb;
+  --status-resolved: #15803d;
+  --status-archived: #8a8a82;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #0f0f0e;
+  --surface: #171716;
+  --fg: #f1f1ea;
+  --muted: #222220;
+  --muted-fg: #a5a59d;
+  --line: #d9d9d0;
+  --line-soft: #2f2f2b;
+  --accent: #ff6b35;
+  --accent-fg: #121211;
+  --accent-soft: #34190f;
+  --danger: #ff7a66;
+  --danger-soft: #3a1611;
+  --status-open: #ff6b35;
+  --status-progress: #6b9bff;
+  --status-resolved: #4ade80;
+  --status-archived: #7c7c75;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-muted-fg: var(--muted-fg);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-geist-sans), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --shadow-brutal-sm: 2px 2px 0 0 var(--line);
+  --shadow-brutal: 3px 3px 0 0 var(--line);
+  --shadow-brutal-lg: 5px 5px 0 0 var(--line);
+
+  --ease-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --animate-fade-in: fade-in 200ms var(--ease-smooth) both;
+  --animate-rise: rise 220ms var(--ease-smooth) both;
+  --animate-pop: pop 180ms var(--ease-smooth) both;
+  --animate-slide-in-left: slide-in-left 220ms var(--ease-smooth) both;
+  --animate-shimmer: shimmer 1.6s ease-in-out infinite;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(6px); }
+  }
+  @keyframes pop {
+    from { opacity: 0; transform: translateY(-4px) scale(0.98); }
+  }
+  @keyframes slide-in-left {
+    from { transform: translateX(-100%); }
+  }
+  @keyframes shimmer {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.55; }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-fg);
+  }
+
+  /* Native <dialog> animation (see components/ui/dialog.tsx). */
+  dialog[open] {
+    animation: pop 200ms var(--ease-smooth) both;
+  }
+  dialog::backdrop {
+    background: rgb(18 18 17 / 0.35);
+    animation: fade-in 200ms var(--ease-smooth) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after,
+  dialog::backdrop {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
