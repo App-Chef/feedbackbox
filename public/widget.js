@@ -31,7 +31,7 @@
   var origin;
   try {
     origin = new URL(script.src, location.href).origin;
-  } catch (e) {
+  } catch {
     return;
   }
 
@@ -407,7 +407,8 @@
           first.focus();
         }
       } else if (event.key === "Enter" && (event.metaKey || event.ctrlKey)) {
-        form.requestSubmit ? form.requestSubmit() : submit(event);
+        if (form.requestSubmit) form.requestSubmit();
+        else submit(event);
       }
     });
 

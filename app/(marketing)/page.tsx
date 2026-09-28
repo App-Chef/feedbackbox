@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowRight, Code2, Github, Lightbulb, MessageSquare, Rocket, UserX } from "lucide-react";
+import { ArrowDown, ArrowRight, Code2, GitFork, Lightbulb, MessageSquare, Rocket, UserX } from "lucide-react";
 import { WidgetMock } from "@/components/marketing/widget-mock";
 import { ButtonLink } from "@/components/ui/button";
 import { CopyButton } from "@/components/ui/copy-button";
@@ -8,7 +8,7 @@ const FEATURES = [
   { icon: MessageSquare, title: "Simple", text: "One tiny widget. One inbox. No setup maze." },
   { icon: UserX, title: "Anonymous", text: "Users don't need an account. Email is optional." },
   { icon: Lightbulb, title: "Useful", text: "Every message comes with the page, browser and screen size." },
-  { icon: Github, title: "Open source", text: "MIT licensed. Self-host it on Supabase if you want." },
+  { icon: GitFork, title: "Open source", text: "MIT licensed. Self-host it on Supabase if you want." },
 ];
 
 const STEPS = [
