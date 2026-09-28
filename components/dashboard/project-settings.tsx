@@ -4,6 +4,7 @@ import { MessageSquare } from "lucide-react";
 import { useActionState, useEffect, useState, useTransition } from "react";
 import { deleteProject, updateProject, updateWidgetConfig, type ActionState } from "@/app/dashboard/actions";
 import { Alert } from "@/components/ui/alert";
+import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
 import { Field, Input, Textarea } from "@/components/ui/field";
@@ -36,18 +37,18 @@ export function ProjectDetailsForm({ project }: { project: { id: string; name: s
 
   return (
     <Section title="Project" description="Only you can see this.">
-      <form action={action} className="space-y-4">
+      <Form action={action} className="space-y-4">
         <Field label="Project name" error={state.fieldErrors?.name}>
-          {(p) => <Input {...p} name="name" defaultValue={project.name} required maxLength={80} />}
+          {(p) => <Input {...p} name="name" defaultValue={state.values?.name ?? project.name} required maxLength={80} />}
         </Field>
         <Field label="Description" optional error={state.fieldErrors?.description}>
-          {(p) => <Textarea {...p} name="description" defaultValue={project.description ?? ""} maxLength={500} rows={2} className="min-h-0" />}
+          {(p) => <Textarea {...p} name="description" defaultValue={state.values?.description ?? project.description ?? ""} maxLength={500} rows={2} className="min-h-0" />}
         </Field>
         {state.error && <Alert>{state.error}</Alert>}
         <Button type="submit" variant="secondary" loading={pending}>
           Save project
         </Button>
-      </form>
+      </Form>
     </Section>
   );
 }
@@ -59,13 +60,13 @@ export function WidgetSettingsForm({ projectId, config }: { projectId: string; c
 
   return (
     <Section title="Widget" description="How the feedback button looks on your site.">
-      <form action={action} className="space-y-5">
+      <Form action={action} className="space-y-5">
         <Field label="Button label" error={state.fieldErrors?.buttonLabel}>
           {(p) => (
             <Input
               {...p}
               name="buttonLabel"
-              defaultValue={config.buttonLabel}
+              defaultValue={state.values?.buttonLabel ?? config.buttonLabel}
               maxLength={24}
               required
               onChange={(e) => setPreview((c) => ({ ...c, buttonLabel: e.target.value }))}
@@ -128,7 +129,7 @@ export function WidgetSettingsForm({ projectId, config }: { projectId: string; c
         <Button type="submit" variant="secondary" loading={pending}>
           Save widget settings
         </Button>
-      </form>
+      </Form>
     </Section>
   );
 }

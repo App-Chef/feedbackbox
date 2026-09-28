@@ -45,7 +45,7 @@ export default function DemoPage() {
         </ButtonLink>
       </div>
 
-      <Script src="/widget.js" data-project="demo" data-demo="true" strategy="afterInteractive" />
+      <Script src="/widget.js" data-project="demo" data-demo="true" data-theme="auto" strategy="afterInteractive" />
     </div>
   );
 }

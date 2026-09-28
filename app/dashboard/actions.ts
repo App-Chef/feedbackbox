@@ -15,7 +15,13 @@ export type ActionState = {
   ok?: boolean;
   error?: string;
   fieldErrors?: Record<string, string>;
+  /** Echoed back on errors so forms keep what the user typed (React resets forms after actions). */
+  values?: Record<string, string>;
 };
+
+function formValues(formData: FormData, keys: string[]) {
+  return Object.fromEntries(keys.map((k) => [k, String(formData.get(k) ?? "").slice(0, 1000)]));
+}
 
 function fieldErrors(error: z.ZodError): Record<string, string> {
   const out: Record<string, string> = {};
@@ -33,14 +39,15 @@ async function getUserClient() {
 }
 
 export async function createProject(_prev: ActionState, formData: FormData): Promise<ActionState> {
+  const values = formValues(formData, ["name", "description"]);
   const parsed = projectSchema.safeParse({
     name: formData.get("name"),
     description: formData.get("description") ?? undefined,
   });
-  if (!parsed.success) return { fieldErrors: fieldErrors(parsed.error) };
+  if (!parsed.success) return { values, fieldErrors: fieldErrors(parsed.error) };
 
   const { supabase, user } = await getUserClient();
-  if (!user) return { error: "Your session expired. Please sign in again." };
+  if (!user) return { values, error: "Your session expired. Please sign in again." };
 
   const { data, error } = await supabase
     .from("projects")
@@ -48,7 +55,7 @@ export async function createProject(_prev: ActionState, formData: FormData): Pro
     .select("id")
     .single();
 
-  if (error || !data) return { error: "We couldn't create the project. Please try again." };
+  if (error || !data) return { values, error: "We couldn't create the project. Please try again." };
 
   revalidatePath("/dashboard", "layout");
   redirect(`/dashboard/projects/${data.id}/install?new=1`);
@@ -59,11 +66,12 @@ export async function updateProject(
   _prev: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
+  const values = formValues(formData, ["name", "description"]);
   const parsed = projectSchema.safeParse({
     name: formData.get("name"),
     description: formData.get("description") ?? undefined,
   });
-  if (!parsed.success) return { fieldErrors: fieldErrors(parsed.error) };
+  if (!parsed.success) return { values, fieldErrors: fieldErrors(parsed.error) };
 
   const { supabase } = await getUserClient();
   const { data, error } = await supabase
@@ -72,7 +80,7 @@ export async function updateProject(
     .eq("id", projectId)
     .select("id");
 
-  if (error || !data?.length) return { error: "We couldn't update the project. Please try again." };
+  if (error || !data?.length) return { values, error: "We couldn't update the project. Please try again." };
 
   revalidatePath("/dashboard", "layout");
   return { ok: true };
@@ -83,12 +91,13 @@ export async function updateWidgetConfig(
   _prev: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
+  const values = formValues(formData, ["buttonLabel", "accentColor", "position"]);
   const parsed = widgetConfigSchema.safeParse({
     buttonLabel: formData.get("buttonLabel"),
     accentColor: formData.get("accentColor"),
     position: formData.get("position"),
   });
-  if (!parsed.success) return { fieldErrors: fieldErrors(parsed.error) };
+  if (!parsed.success) return { values, fieldErrors: fieldErrors(parsed.error) };
 
   const { supabase } = await getUserClient();
   const { data, error } = await supabase
@@ -97,7 +106,7 @@ export async function updateWidgetConfig(
     .eq("id", projectId)
     .select("id");
 
-  if (error || !data?.length) return { error: "We couldn't save the widget settings. Please try again." };
+  if (error || !data?.length) return { values, error: "We couldn't save the widget settings. Please try again." };
 
   revalidatePath(`/dashboard/projects/${projectId}`, "layout");
   return { ok: true };

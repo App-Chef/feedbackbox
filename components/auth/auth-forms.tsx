@@ -2,7 +2,7 @@
 
 import { Mail } from "lucide-react";
 import Link from "next/link";
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import {
   requestPasswordReset,
   signIn,
@@ -13,6 +13,7 @@ import {
   type AuthState,
 } from "@/app/(auth)/actions";
 import { Alert } from "@/components/ui/alert";
+import { Form } from "@/components/ui/form";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { Field, Input } from "@/components/ui/field";
 
@@ -71,10 +72,10 @@ export function SignInForm({ next, googleEnabled, linkError }: { next?: string; 
         )}
 
         {mode === "password" ? (
-          <form action={action} className="space-y-4" key="password">
+          <Form action={action} className="space-y-4" key="password">
             <input type="hidden" name="next" value={next ?? ""} />
             <Field label="Email" error={state.fieldErrors?.email}>
-              {(p) => <Input {...p} name="email" type="email" autoComplete="email" required autoFocus />}
+              {(p) => <Input {...p} name="email" type="email" autoComplete="email" required autoFocus defaultValue={state.email} />}
             </Field>
             <Field label="Password" error={state.fieldErrors?.password}>
               {(p) => <Input {...p} name="password" type="password" autoComplete="current-password" required />}
@@ -88,19 +89,19 @@ export function SignInForm({ next, googleEnabled, linkError }: { next?: string; 
             <Button type="submit" loading={pending} className="w-full">
               Sign in
             </Button>
-          </form>
+          </Form>
         ) : (
-          <form action={magicAction} className="space-y-4" key="magic">
+          <Form action={magicAction} className="space-y-4" key="magic">
             <input type="hidden" name="next" value={next ?? ""} />
             <Field label="Email" error={magicState.fieldErrors?.email}>
-              {(p) => <Input {...p} name="email" type="email" autoComplete="email" required autoFocus />}
+              {(p) => <Input {...p} name="email" type="email" autoComplete="email" required autoFocus defaultValue={magicState.email} />}
             </Field>
             <Status state={magicState} />
             <Button type="submit" loading={magicPending} className="w-full">
               <Mail className="size-4" aria-hidden="true" />
               Email me a sign-in link
             </Button>
-          </form>
+          </Form>
         )}
 
         <button
@@ -141,9 +142,9 @@ export function SignUpForm({ googleEnabled }: { googleEnabled: boolean }) {
         {state.message ? (
           <Alert tone="success">{state.message}</Alert>
         ) : (
-          <form action={action} className="space-y-4">
+          <Form action={action} className="space-y-4">
             <Field label="Email" error={state.fieldErrors?.email}>
-              {(p) => <Input {...p} name="email" type="email" autoComplete="email" required autoFocus />}
+              {(p) => <Input {...p} name="email" type="email" autoComplete="email" required autoFocus defaultValue={state.email} />}
             </Field>
             <Field label="Password" hint="At least 8 characters." error={state.fieldErrors?.password}>
               {(p) => <Input {...p} name="password" type="password" autoComplete="new-password" minLength={8} required />}
@@ -152,7 +153,7 @@ export function SignUpForm({ googleEnabled }: { googleEnabled: boolean }) {
             <Button type="submit" loading={pending} className="w-full">
               Create account
             </Button>
-          </form>
+          </Form>
         )}
       </div>
 
@@ -177,15 +178,15 @@ export function ForgotPasswordForm() {
         {state.message ? (
           <Alert tone="success">{state.message}</Alert>
         ) : (
-          <form action={action} className="space-y-4">
+          <Form action={action} className="space-y-4">
             <Field label="Email" error={state.fieldErrors?.email}>
-              {(p) => <Input {...p} name="email" type="email" autoComplete="email" required autoFocus />}
+              {(p) => <Input {...p} name="email" type="email" autoComplete="email" required autoFocus defaultValue={state.email} />}
             </Field>
             <Status state={state} />
             <Button type="submit" loading={pending} className="w-full">
               Send reset link
             </Button>
-          </form>
+          </Form>
         )}
       </div>
       <p className="mt-10 text-center text-sm text-muted-fg">
@@ -199,9 +200,15 @@ export function ForgotPasswordForm() {
 
 export function UpdatePasswordForm({ standalone = true }: { standalone?: boolean }) {
   const [state, action, pending] = useActionState<AuthState, FormData>(updatePassword, {});
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // Clear the password fields once the change went through.
+  useEffect(() => {
+    if (state.message) formRef.current?.reset();
+  }, [state]);
 
   const form = (
-    <form action={action} className="space-y-4">
+    <Form ref={formRef} action={action} className="space-y-4">
       <Field label="New password" hint="At least 8 characters." error={state.fieldErrors?.password}>
         {(p) => <Input {...p} name="password" type="password" autoComplete="new-password" minLength={8} required autoFocus={standalone} />}
       </Field>
@@ -212,7 +219,7 @@ export function UpdatePasswordForm({ standalone = true }: { standalone?: boolean
       <Button type="submit" variant={standalone ? "primary" : "secondary"} loading={pending} className={standalone ? "w-full" : undefined}>
         Update password
       </Button>
-    </form>
+    </Form>
   );
 
   if (!standalone) return form;

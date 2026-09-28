@@ -35,7 +35,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="min-h-dvh bg-bg font-sans text-fg antialiased">
+      <body
+        suppressHydrationWarning
+        className="min-h-dvh bg-bg font-sans text-fg antialiased"
+      >
         <a
           href="#main"
           className="sr-only z-50 rounded-lg bg-surface px-3 py-2 focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:border focus:border-line"

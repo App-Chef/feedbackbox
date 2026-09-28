@@ -4,6 +4,7 @@
  * <script src="https://your-feedbackbox.app/widget.js" data-project="PROJECT_ID" async></script>
  *
  * Optional attributes: data-label, data-color, data-position ("bottom-right" | "bottom-left"),
+ * data-theme ("light" | "dark" | "auto", default "light"),
  * data-demo ("true" renders the widget without sending anything).
  *
  * Renders inside a closed Shadow DOM so host styles can't leak in or out,
@@ -19,6 +20,7 @@
 
   var projectId = script.getAttribute("data-project") || "";
   var demo = script.getAttribute("data-demo") === "true";
+  var theme = script.getAttribute("data-theme") || "light";
   if (!projectId && !demo) {
     console.warn("[Feedbackbox] Missing data-project attribute.");
     return;
@@ -109,6 +111,8 @@
   var CHECK_ICON =
     '<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
 
+  var DARK = "--fg:#f3f3ee;--bg:#161614;--muted:#a3a39c;--line:#f3f3ee;--soft:#34342f;--field:#0f0f0e";
+
   function styles(accent, accentText, left) {
     var side = left ? "left" : "right";
     return (
@@ -116,7 +120,8 @@
       "*{box-sizing:border-box;margin:0;font-family:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}" +
       ".root{--fg:#0f0f0f;--bg:#ffffff;--muted:#5b5b57;--line:#0f0f0f;--soft:#e7e7e1;--field:#fafaf7;--accent:" + accent + ";--accent-fg:" + accentText + ";" +
       "position:fixed;z-index:2147483000;bottom:20px;" + side + ":20px;color:var(--fg);font-size:14px;line-height:1.45}" +
-      "@media (prefers-color-scheme:dark){.root{--fg:#f3f3ee;--bg:#161614;--muted:#a3a39c;--line:#f3f3ee;--soft:#34342f;--field:#0f0f0e}}" +
+      ".root.dark{" + DARK + "}" +
+      "@media (prefers-color-scheme:dark){.root.auto{" + DARK + "}}" +
       ".trigger{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;cursor:pointer;" +
       "background:var(--accent);color:var(--accent-fg);border:1px solid var(--line);box-shadow:3px 3px 0 var(--line);font-weight:600;font-size:14px;" +
       "transition:transform .18s ease-out,box-shadow .18s ease-out,opacity .18s ease-out}" +
@@ -244,7 +249,11 @@
       ],
     );
     var backdrop = el("div", { class: "backdrop", hidden: "" });
-    var root = el("div", { class: "root" }, [backdrop, panel, trigger]);
+    var root = el("div", { class: "root " + (theme === "dark" || theme === "auto" ? theme : "light") }, [
+      backdrop,
+      panel,
+      trigger,
+    ]);
 
     shadow.appendChild(style);
     shadow.appendChild(root);

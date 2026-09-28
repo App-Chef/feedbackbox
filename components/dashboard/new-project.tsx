@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useActionState, useState } from "react";
 import { createProject, type ActionState } from "@/app/dashboard/actions";
 import { Alert } from "@/components/ui/alert";
+import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
 import { Field, Input, Textarea } from "@/components/ui/field";
@@ -13,20 +14,30 @@ export function NewProjectForm({ autoFocus }: { autoFocus?: boolean }) {
   const [state, action, pending] = useActionState<ActionState, FormData>(createProject, {});
 
   return (
-    <form action={action} className="space-y-4">
+    <Form action={action} className="space-y-4">
       <Field label="Project name" error={state.fieldErrors?.name}>
         {(props) => (
-          <Input {...props} name="name" required maxLength={80} placeholder="My app" autoFocus={autoFocus} autoComplete="off" />
+          <Input {...props} name="name" required maxLength={80} placeholder="My app" autoFocus={autoFocus} autoComplete="off" defaultValue={state.values?.name} />
         )}
       </Field>
       <Field label="Description" optional error={state.fieldErrors?.description}>
-        {(props) => <Textarea {...props} name="description" maxLength={500} rows={2} className="min-h-0" placeholder="What is it?" />}
+        {(props) => (
+          <Textarea
+            {...props}
+            name="description"
+            maxLength={500}
+            rows={2}
+            className="min-h-0"
+            placeholder="What is it?"
+            defaultValue={state.values?.description}
+          />
+        )}
       </Field>
       {state.error && <Alert>{state.error}</Alert>}
       <Button type="submit" loading={pending} className="w-full">
         Create project
       </Button>
-    </form>
+    </Form>
   );
 }
 
