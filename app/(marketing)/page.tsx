@@ -1,4 +1,5 @@
 import { ArrowDown, ArrowRight, Code2, GitFork, Lightbulb, MessageSquare, Rocket, UserX } from "lucide-react";
+import Script from "next/script";
 import { WidgetMock } from "@/components/marketing/widget-mock";
 import { ButtonLink } from "@/components/ui/button";
 import { CopyButton } from "@/components/ui/copy-button";
@@ -115,6 +116,8 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      <Script src="/widget.js" data-project="demo" data-demo="true" data-theme="auto" strategy="afterInteractive" />
     </>
   );
 }

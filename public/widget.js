@@ -4,7 +4,8 @@
  * <script src="https://your-feedbackbox.app/widget.js" data-project="PROJECT_ID" async></script>
  *
  * Optional attributes: data-label, data-color, data-position ("bottom-right" | "bottom-left"),
- * data-theme ("light" | "dark" | "auto", default "light"),
+ * data-theme ("light" | "dark" | "auto", default "light"; "auto" follows the page's
+ *   <html data-theme> or class="dark"/"light" when set, otherwise the OS preference),
  * data-demo ("true" renders the widget without sending anything).
  *
  * Renders inside a closed Shadow DOM so host styles can't leak in or out,
@@ -258,6 +259,23 @@
     shadow.appendChild(style);
     shadow.appendChild(root);
     document.body.appendChild(host);
+
+    // In auto mode, follow the host page's own theme switch if it has one.
+    if (theme === "auto") {
+      var html = document.documentElement;
+      var syncTheme = function () {
+        var t = html.getAttribute("data-theme");
+        if (t !== "dark" && t !== "light") {
+          t = html.classList.contains("dark") ? "dark" : html.classList.contains("light") ? "light" : "auto";
+        }
+        root.classList.remove("light", "dark", "auto");
+        root.classList.add(t);
+      };
+      syncTheme();
+      if (window.MutationObserver) {
+        new MutationObserver(syncTheme).observe(html, { attributes: true, attributeFilter: ["data-theme", "class"] });
+      }
+    }
 
     var openedAt = 0;
     var sending = false;
