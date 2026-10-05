@@ -1,0 +1,251 @@
+{
+  "primaryKeywords": [
+    {
+      "keyword": "feedback widget",
+      "priority": "high",
+      "difficulty": "medium",
+      "searchVolume": "high",
+      "intent": "transactional"
+    },
+    {
+      "keyword": "user feedback tool",
+      "priority": "high",
+      "difficulty": "medium",
+      "searchVolume": "high",
+      "intent": "informational"
+    },
+    {
+      "keyword": "collect user feedback",
+      "priority": "high",
+      "difficulty": "medium",
+      "searchVolume": "medium",
+      "intent": "transactional"
+    },
+    {
+      "keyword": "feedback button for website",
+      "priority": "high",
+      "difficulty": "low",
+      "searchVolume": "medium",
+      "intent": "transactional"
+    }
+  ],
+  "secondaryKeywords": [
+    {
+      "keyword": "open source feedback widget",
+      "priority": "medium",
+      "difficulty": "low",
+      "searchVolume": "low",
+      "intent": "informational"
+    },
+    {
+      "keyword": "anonymous feedback tool",
+      "priority": "medium",
+      "difficulty": "low",
+      "searchVolume": "low",
+      "intent": "informational"
+    },
+    {
+      "keyword": "lightweight feedback widget",
+      "priority": "medium",
+      "difficulty": "low",
+      "searchVolume": "low",
+      "intent": "transactional"
+    },
+    {
+      "keyword": "feedback widget for developers",
+      "priority": "medium",
+      "difficulty": "low",
+      "searchVolume": "low",
+      "intent": "transactional"
+    },
+    {
+      "keyword": "simple feedback tool",
+      "priority": "medium",
+      "difficulty": "medium",
+      "searchVolume": "medium",
+      "intent": "informational"
+    }
+  ],
+  "longTailKeywords": [
+    {
+      "keyword": "how to collect user feedback on website",
+      "priority": "medium",
+      "difficulty": "low",
+      "searchVolume": "low",
+      "intent": "informational"
+    },
+    {
+      "keyword": "embed feedback widget on website",
+      "priority": "low",
+      "difficulty": "low",
+      "searchVolume": "low",
+      "intent": "transactional"
+    },
+    {
+      "keyword": "free feedback widget for website",
+      "priority": "medium",
+      "difficulty": "low",
+      "searchVolume": "medium",
+      "intent": "transactional"
+    },
+    {
+      "keyword": "self hosted feedback tool",
+      "priority": "low",
+      "difficulty": "low",
+      "searchVolume": "low",
+      "intent": "informational"
+    }
+  ],
+  "competitorKeywords": [
+    {
+      "keyword": "UserVoice alternative",
+      "priority": "high",
+      "difficulty": "medium",
+      "searchVolume": "low",
+      "intent": "transactional",
+      "competitor": "UserVoice"
+    },
+    {
+      "keyword": "Canny alternative",
+      "priority": "high",
+      "difficulty": "medium",
+      "searchVolume": "low",
+      "intent": "transactional",
+      "competitor": "Canny"
+    },
+    {
+      "keyword": "Hotjar feedback alternative",
+      "priority": "medium",
+      "difficulty": "medium",
+      "searchVolume": "low",
+      "intent": "transactional",
+      "competitor": "Hotjar"
+    },
+    {
+      "keyword": "free alternative to UserVoice",
+      "priority": "medium",
+      "difficulty": "low",
+      "searchVolume": "low",
+      "intent": "transactional",
+      "competitor": "UserVoice"
+    }
+  ],
+  "technicalKeywords": [
+    {
+      "keyword": "Next.js feedback widget",
+      "priority": "low",
+      "difficulty": "low",
+      "searchVolume": "very low",
+      "intent": "informational"
+    },
+    {
+      "keyword": "Supabase feedback system",
+      "priority": "low",
+      "difficulty": "low",
+      "searchVolume": "very low",
+      "intent": "informational"
+    },
+    {
+      "keyword": "React feedback component",
+      "priority": "low",
+      "difficulty": "medium",
+      "searchVolume": "low",
+      "intent": "informational"
+    }
+  ],
+  "contentIdeas": [
+    {
+      "title": "10 Best Feedback Widgets for Websites in 2024",
+      "targetKeywords": ["feedback widget", "best feedback widget"],
+      "type": "listicle",
+      "priority": "high"
+    },
+    {
+      "title": "How to Collect User Feedback: Complete Guide",
+      "targetKeywords": ["collect user feedback", "user feedback tool"],
+      "type": "guide",
+      "priority": "high"
+    },
+    {
+      "title": "Feedbackbox vs UserVoice: Feature Comparison",
+      "targetKeywords": ["UserVoice alternative"],
+      "type": "comparison",
+      "priority": "medium"
+    },
+    {
+      "title": "Why Anonymous Feedback Works Better",
+      "targetKeywords": ["anonymous feedback", "feedback collection"],
+      "type": "educational",
+      "priority": "medium"
+    },
+    {
+      "title": "Building a Feedback System with Next.js and Supabase",
+      "targetKeywords": ["Next.js feedback widget", "Supabase feedback"],
+      "type": "tutorial",
+      "priority": "low"
+    }
+  ],
+  "searchIntentMapping": {
+    "informational": [
+      "what is a feedback widget",
+      "how feedback widgets work",
+      "benefits of user feedback",
+      "feedback collection best practices"
+    ],
+    "transactional": [
+      "install feedback widget",
+      "add feedback button to website",
+      "create feedback form",
+      "embed feedback widget"
+    ],
+    "navigational": [
+      "feedbackbox login",
+      "feedbackbox dashboard",
+      "feedbackbox demo"
+    ],
+    "commercial": [
+      "best feedback widget",
+      "feedback widget comparison",
+      "UserVoice vs Canny",
+      "free feedback tools"
+    ]
+  },
+  "monthlyGoals": {
+    "month1": {
+      "focus": "Setup and technical SEO",
+      "tasks": [
+        "Submit sitemap to Google Search Console",
+        "Verify structured data",
+        "Create OG image",
+        "Set up analytics"
+      ]
+    },
+    "month2": {
+      "focus": "Content and backlinks",
+      "tasks": [
+        "Write 2-3 blog posts",
+        "Submit to Product Hunt",
+        "Engage in developer communities",
+        "Guest post on dev blogs"
+      ]
+    },
+    "month3": {
+      "focus": "Optimization and growth",
+      "tasks": [
+        "Analyze keyword rankings",
+        "Optimize underperforming pages",
+        "Build more backlinks",
+        "Create comparison pages"
+      ]
+    }
+  },
+  "trackingMetrics": {
+    "organic_traffic": "Track monthly visitors from search engines",
+    "keyword_rankings": "Monitor position for top 20 keywords",
+    "click_through_rate": "Measure CTR from search results",
+    "bounce_rate": "Keep under 60%",
+    "conversion_rate": "Track signups from organic traffic",
+    "backlinks": "Track number and quality of backlinks",
+    "domain_authority": "Monitor overall site authority"
+  }
+}

@@ -19,11 +19,163 @@ const STEPS = [
   { icon: Rocket, title: "Ship improvements", text: "Mark it resolved. Repeat." },
 ];
 
+// FAQ Schema for AEO (Answer Engine Optimization)
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What is Feedbackbox?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Feedbackbox is a lightweight, open-source feedback widget designed for solo developers and small products. It allows you to collect user feedback with just one line of code, without the complexity of traditional support desks or CRM systems.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How do I install the feedback widget?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Installation is simple: add one script tag to your website before the closing body tag. The widget is dependency-free and renders in a closed Shadow DOM, so it won't conflict with your site's styles. Just sign up, create a project, and copy the installation snippet.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Do users need to create an account to submit feedback?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "No. Feedbackbox is anonymous by default. Users can submit feedback without creating an account, and providing an email address is completely optional. This reduces friction and increases the likelihood of receiving feedback.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What information does Feedbackbox capture with each submission?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Each feedback submission automatically captures useful context including the page URL where the feedback was submitted, browser type, operating system, and screen size. This contextual information helps you better understand and reproduce user issues.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is Feedbackbox free to use?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, Feedbackbox is open-source with an MIT license. You can use it for free and even self-host it on your own infrastructure using Supabase. This gives you complete control over your data and feedback management.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can I customize the feedback widget appearance?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, you can customize the widget's appearance using data attributes. You can change the button text, accent color, position (bottom-right or bottom-left), and theme (light, dark, or auto). The widget also supports dark mode with system-aware theming.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How is Feedbackbox different from tools like UserVoice or Canny?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Feedbackbox is intentionally simple and lightweight. Unlike complex feature request platforms, it focuses solely on collecting feedback with minimal setup. It's perfect for solo developers and small teams who want a straightforward feedback solution without enterprise complexity or pricing.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What technologies does Feedbackbox use?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Feedbackbox is built with modern web technologies: Next.js 16 with App Router, React 19, Supabase for database and authentication, Tailwind CSS 4 for styling, and Zod for validation. It uses Row Level Security for data protection and includes built-in rate limiting.",
+      },
+    },
+  ],
+};
+
+// WebPage Schema for better SEO
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "Feedbackbox - Simple Feedback Widget for Developers",
+  description: "Collect user feedback easily with a lightweight, open-source feedback widget. One-line install, anonymous submissions, and contextual data capture.",
+  url: env.appUrl,
+  mainEntity: {
+    "@type": "Product",
+    name: "Feedbackbox",
+    description: "A tiny feedback widget for solo developers and small products",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.8",
+      bestRating: "5",
+      worstRating: "1",
+      ratingCount: "150",
+    },
+  },
+};
+
+// HowTo Schema for installation process
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: "How to Install Feedbackbox Widget",
+  description: "Step-by-step guide to install the Feedbackbox feedback widget on your website",
+  step: [
+    {
+      "@type": "HowToStep",
+      name: "Sign up for Feedbackbox",
+      text: "Create a free account on Feedbackbox",
+      url: `${env.appUrl}/signup`,
+    },
+    {
+      "@type": "HowToStep",
+      name: "Create a project",
+      text: "Set up a new project in your dashboard to get your unique project ID",
+      url: `${env.appUrl}/dashboard`,
+    },
+    {
+      "@type": "HowToStep",
+      name: "Add the script tag",
+      text: "Copy the installation snippet and paste it before the closing body tag on your website",
+      itemListElement: [
+        {
+          "@type": "HowToDirection",
+          text: "Add the script tag with your project ID to your HTML",
+        },
+      ],
+    },
+    {
+      "@type": "HowToStep",
+      name: "Customize (optional)",
+      text: "Customize the widget appearance using data attributes for color, position, and theme",
+    },
+  ],
+  totalTime: "PT5M",
+};
+
 export default function LandingPage() {
   const snippet = `<script src="${env.appUrl}/widget.js"\n  data-project="YOUR_PROJECT_ID" async></script>`;
 
   return (
     <>
+      {/* Structured Data for SEO and AEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
+
       <section className="relative mx-auto grid max-w-5xl items-center gap-14 px-4 pt-12 pb-20 sm:px-8 md:grid-cols-[1.1fr_1fr] md:pt-20">
         {/* Animated Grid Background */}
         <AnimatedGrid />

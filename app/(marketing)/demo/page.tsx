@@ -1,7 +1,15 @@
+import type { Metadata } from "next";
 import Script from "next/script";
 import { ButtonLink } from "@/components/ui/button";
 
-export const metadata = { title: "Demo" };
+export const metadata: Metadata = {
+  title: "Demo",
+  description: "Try the Feedbackbox widget live. See how easy it is to collect user feedback with a simple, anonymous feedback button. Click the feedback button to test it yourself.",
+  openGraph: {
+    title: "Feedbackbox Demo - Try the Feedback Widget",
+    description: "Experience the Feedbackbox widget in action. See how easy it is to collect user feedback.",
+  },
+};
 
 /** A pretend product page with the real widget running in demo mode. */
 export default function DemoPage() {
