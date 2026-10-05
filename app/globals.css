@@ -1,28 +1,8 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
 
 :root {
-  --bg: #fafaf7;
-  --surface: #ffffff;
-  --fg: #121211;
-  --muted: #f0f0ea;
-  --muted-fg: #5f5f59;
-  --line: #121211;
-  --line-soft: #e0e0d8;
-  --accent: #ff5a1f;
-  --accent-fg: #121211;
-  --accent-soft: #ffeadf;
-  --danger: #c2371f;
-  --danger-soft: #fdecea;
-  --status-open: #ff5a1f;
-  --status-progress: #2563eb;
-  --status-resolved: #15803d;
-  --status-archived: #8a8a82;
-  color-scheme: light;
-}
-
-[data-theme="dark"] {
   --bg: #0f0f0e;
   --surface: #171716;
   --fg: #f1f1ea;
@@ -40,6 +20,26 @@
   --status-resolved: #4ade80;
   --status-archived: #7c7c75;
   color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #fafaf7;
+  --surface: #ffffff;
+  --fg: #121211;
+  --muted: #f0f0ea;
+  --muted-fg: #5f5f59;
+  --line: #121211;
+  --line-soft: #e0e0d8;
+  --accent: #ff5a1f;
+  --accent-fg: #121211;
+  --accent-soft: #ffeadf;
+  --danger: #c2371f;
+  --danger-soft: #fdecea;
+  --status-open: #ff5a1f;
+  --status-progress: #2563eb;
+  --status-resolved: #15803d;
+  --status-archived: #8a8a82;
+  color-scheme: light;
 }
 
 @theme inline {

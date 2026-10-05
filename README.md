@@ -15,6 +15,7 @@ just a button that works and a clean place to read what comes in.
 - **Triage dashboard.** Search, filter by type and status, and move feedback through open → in progress → resolved →
   archived.
 - **Multiple projects.** Each project has its own widget, settings and inbox.
+- **Dark mode.** System-aware theme with manual toggle for light, dark, or system preference.
 - **Secure by design.** Row Level Security on every table, a service-role-only submission function, and rate limits
   both in memory and in the database.
 

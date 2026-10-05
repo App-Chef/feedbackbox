@@ -1,44 +1,38 @@
 "use client";
 
-import { Monitor, Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { useSyncExternalStore } from "react";
 import { cn } from "@/lib/utils";
 
-type Theme = "light" | "dark" | "system";
+type Theme = "light" | "dark";
 const KEY = "fbx-theme";
 const listeners = new Set<() => void>();
 
 function read(): Theme {
   try {
     const v = localStorage.getItem(KEY);
-    return v === "light" || v === "dark" ? v : "system";
+    return v === "light" ? "light" : "dark";
   } catch {
-    return "system";
+    return "dark";
   }
 }
 
 export function applyTheme(theme: Theme) {
-  const dark = theme === "dark" || (theme === "system" && matchMedia("(prefers-color-scheme: dark)").matches);
-  document.documentElement.dataset.theme = dark ? "dark" : "light";
+  document.documentElement.dataset.theme = theme;
 }
 
-function setTheme(theme: Theme) {
+function toggleTheme() {
+  const current = read();
+  const next = current === "dark" ? "light" : "dark";
   try {
-    if (theme === "system") localStorage.removeItem(KEY);
-    else localStorage.setItem(KEY, theme);
+    localStorage.setItem(KEY, next);
   } catch {}
-  applyTheme(theme);
+  applyTheme(next);
   listeners.forEach((l) => l());
 }
 
 /** Inline script that sets the theme before first paint (no flash). */
-export const themeScript = `(function(){try{var t=localStorage.getItem('${KEY}');var d=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.dataset.theme=d?'dark':'light';matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(e){if(!localStorage.getItem('${KEY}'))document.documentElement.dataset.theme=e.matches?'dark':'light'})}catch(e){}})()`;
-
-const options: Array<{ value: Theme; label: string; icon: typeof Sun }> = [
-  { value: "light", label: "Light", icon: Sun },
-  { value: "dark", label: "Dark", icon: Moon },
-  { value: "system", label: "System", icon: Monitor },
-];
+export const themeScript = `(function(){try{var t=localStorage.getItem('${KEY}');document.documentElement.dataset.theme=t==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}})()`;
 
 export function ThemeToggle({ className }: { className?: string }) {
   const theme = useSyncExternalStore(
@@ -47,28 +41,25 @@ export function ThemeToggle({ className }: { className?: string }) {
       return () => listeners.delete(cb);
     },
     read,
-    () => "system" as Theme,
+    () => "dark" as Theme,
   );
 
+  const isDark = theme === "dark";
+  const Icon = isDark ? Sun : Moon;
+  const label = isDark ? "Switch to light mode" : "Switch to dark mode";
+
   return (
-    <div role="radiogroup" aria-label="Color theme" className={cn("inline-flex rounded-[10px] border border-line-soft p-0.5", className)}>
-      {options.map(({ value, label, icon: Icon }) => (
-        <button
-          key={value}
-          type="button"
-          role="radio"
-          aria-checked={theme === value}
-          aria-label={label}
-          title={label}
-          onClick={() => setTheme(value)}
-          className={cn(
-            "grid size-7 place-items-center rounded-lg text-muted-fg transition-colors duration-150",
-            theme === value ? "bg-muted text-fg" : "hover:text-fg",
-          )}
-        >
-          <Icon className="size-3.5" aria-hidden="true" />
-        </button>
-      ))}
-    </div>
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-label={label}
+      title={label}
+      className={cn(
+        "grid size-9 place-items-center rounded-[10px] border border-line-soft text-muted-fg transition-colors hover:bg-muted hover:text-fg",
+        className,
+      )}
+    >
+      <Icon className="size-4" aria-hidden="true" />
+    </button>
   );
 }

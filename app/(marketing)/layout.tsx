@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ButtonLink } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const GITHUB_URL = "https://github.com/App-Chef/feedbackbox";
 
@@ -10,6 +11,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
       <header className="mx-auto flex h-16 w-full max-w-5xl items-center justify-between px-4 sm:px-8">
         <Logo />
         <nav aria-label="Main" className="flex items-center gap-1 sm:gap-2">
+          <ThemeToggle />
           <a href={GITHUB_URL} className="hidden rounded-lg px-3 py-2 text-sm text-muted-fg hover:text-fg sm:inline-block">
             GitHub
           </a>
