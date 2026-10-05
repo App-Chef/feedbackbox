@@ -1,4 +1,4 @@
-import { MessageSquare, X } from "lucide-react";
+import { X } from "lucide-react";
 
 /** Static illustration of the widget for the landing page. */
 export function WidgetMock() {
@@ -27,12 +27,6 @@ export function WidgetMock() {
             Send feedback
           </span>
         </div>
-      </div>
-      <div className="mt-4 flex justify-end">
-        <span className="inline-flex items-center gap-2 rounded-full border border-line bg-accent px-4 py-2.5 text-sm font-semibold text-accent-fg shadow-brutal">
-          <MessageSquare className="size-4" />
-          Feedback
-        </span>
       </div>
     </div>
   );

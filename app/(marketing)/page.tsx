@@ -1,5 +1,6 @@
 import { ArrowDown, ArrowRight, Code2, GitFork, Lightbulb, MessageSquare, Rocket, UserX } from "lucide-react";
 import Script from "next/script";
+import { AnimatedGrid } from "@/components/marketing/animated-grid";
 import { WidgetMock } from "@/components/marketing/widget-mock";
 import { ButtonLink } from "@/components/ui/button";
 import { CopyButton } from "@/components/ui/copy-button";
@@ -23,8 +24,11 @@ export default function LandingPage() {
 
   return (
     <>
-      <section className="mx-auto grid max-w-5xl items-center gap-14 px-4 pt-12 pb-20 sm:px-8 md:grid-cols-[1.1fr_1fr] md:pt-20">
-        <div className="animate-rise">
+      <section className="relative mx-auto grid max-w-5xl items-center gap-14 px-4 pt-12 pb-20 sm:px-8 md:grid-cols-[1.1fr_1fr] md:pt-20">
+        {/* Animated Grid Background */}
+        <AnimatedGrid />
+        
+        <div className="relative z-10 animate-rise">
           <p className="inline-flex items-center gap-2 rounded-full border border-line-soft bg-surface px-3 py-1 text-xs font-medium text-muted-fg">
             <span className="size-1.5 rounded-full bg-accent" aria-hidden="true" />
             For solo developers &amp; small products
@@ -46,7 +50,7 @@ export default function LandingPage() {
             </ButtonLink>
           </div>
         </div>
-        <div className="animate-rise [animation-delay:80ms]">
+        <div className="relative z-10 animate-rise [animation-delay:80ms]">
           <WidgetMock />
         </div>
       </section>

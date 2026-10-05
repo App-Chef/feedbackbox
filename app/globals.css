@@ -71,6 +71,7 @@
   --animate-pop: pop 180ms var(--ease-smooth) both;
   --animate-slide-in-left: slide-in-left 220ms var(--ease-smooth) both;
   --animate-shimmer: shimmer 1.6s ease-in-out infinite;
+  --animate-float: float 4s ease-in-out infinite;
 
   @keyframes fade-in {
     from { opacity: 0; }
@@ -87,6 +88,12 @@
   @keyframes shimmer {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.55; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    25% { transform: translateY(-10px) translateX(5px); }
+    50% { transform: translateY(-5px) translateX(-5px); }
+    75% { transform: translateY(-15px) translateX(3px); }
   }
 }
 
