@@ -9,7 +9,6 @@ next-env.d.ts
 *.tsbuildinfo
 
 # env
-.env
 .env*.local
 
 # misc
@@ -25,3 +24,4 @@ supabase/.branches/
 # local tooling
 .kilo/
 .dist/
+config.bat
