@@ -15,7 +15,7 @@ import {
 import { Alert } from "@/components/ui/alert";
 import { Form } from "@/components/ui/form";
 import { Button, ButtonLink } from "@/components/ui/button";
-import { Field, Input } from "@/components/ui/field";
+import { Field, Input, PasswordInput } from "@/components/ui/field";
 
 function GoogleButton({ next }: { next?: string }) {
   return (
@@ -78,7 +78,7 @@ export function SignInForm({ next, googleEnabled, linkError }: { next?: string; 
               {(p) => <Input {...p} name="email" type="email" autoComplete="email" required autoFocus defaultValue={state.email} />}
             </Field>
             <Field label="Password" error={state.fieldErrors?.password}>
-              {(p) => <Input {...p} name="password" type="password" autoComplete="current-password" required />}
+              {(p) => <PasswordInput {...p} name="password" autoComplete="current-password" required />}
             </Field>
             <div className="-mt-1 text-right">
               <Link href="/forgot-password" className="text-xs text-muted-fg underline-offset-4 hover:text-fg hover:underline">
@@ -147,7 +147,7 @@ export function SignUpForm({ googleEnabled }: { googleEnabled: boolean }) {
               {(p) => <Input {...p} name="email" type="email" autoComplete="email" required autoFocus defaultValue={state.email} />}
             </Field>
             <Field label="Password" hint="At least 8 characters." error={state.fieldErrors?.password}>
-              {(p) => <Input {...p} name="password" type="password" autoComplete="new-password" minLength={8} required />}
+              {(p) => <PasswordInput {...p} name="password" autoComplete="new-password" minLength={8} required />}
             </Field>
             <Status state={state} />
             <Button type="submit" loading={pending} className="w-full">
@@ -210,10 +210,10 @@ export function UpdatePasswordForm({ standalone = true }: { standalone?: boolean
   const form = (
     <Form ref={formRef} action={action} className="space-y-4">
       <Field label="New password" hint="At least 8 characters." error={state.fieldErrors?.password}>
-        {(p) => <Input {...p} name="password" type="password" autoComplete="new-password" minLength={8} required autoFocus={standalone} />}
+        {(p) => <PasswordInput {...p} name="password" autoComplete="new-password" minLength={8} required autoFocus={standalone} />}
       </Field>
       <Field label="Confirm new password" error={state.fieldErrors?.confirm}>
-        {(p) => <Input {...p} name="confirm" type="password" autoComplete="new-password" required />}
+        {(p) => <PasswordInput {...p} name="confirm" autoComplete="new-password" required />}
       </Field>
       <Status state={state} />
       <Button type="submit" variant={standalone ? "primary" : "secondary"} loading={pending} className={standalone ? "w-full" : undefined}>
