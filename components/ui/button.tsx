@@ -8,13 +8,20 @@ type Size = "sm" | "md" | "lg";
 const base =
   "inline-flex items-center justify-center gap-2 rounded-[10px] font-medium whitespace-nowrap select-none " +
   "transition-[transform,box-shadow,background-color,color,border-color] duration-150 ease-out " +
-  "disabled:pointer-events-none disabled:opacity-55";
+  "disabled:pointer-events-none disabled:opacity-55 " +
+  "relative overflow-hidden";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-accent text-accent-fg border border-line shadow-brutal-sm hover:-translate-x-px hover:-translate-y-px hover:shadow-brutal active:translate-x-0.5 active:translate-y-0.5 active:shadow-none",
+    "bg-accent text-accent-fg border border-line shadow-brutal-sm hover:-translate-x-px hover:-translate-y-px hover:shadow-brutal active:translate-x-0.5 active:translate-y-0.5 active:shadow-none " +
+    "before:absolute before:inset-0 before:translate-x-[-100%] before:transition-transform before:duration-500 before:ease-out " +
+    "before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent " +
+    "hover:before:translate-x-[100%]",
   secondary:
-    "bg-surface text-fg border border-line shadow-brutal-sm hover:-translate-x-px hover:-translate-y-px hover:shadow-brutal active:translate-x-0.5 active:translate-y-0.5 active:shadow-none",
+    "bg-surface text-fg border border-line shadow-brutal-sm hover:-translate-x-px hover:-translate-y-px hover:shadow-brutal active:translate-x-0.5 active:translate-y-0.5 active:shadow-none " +
+    "before:absolute before:inset-0 before:translate-x-[-100%] before:transition-transform before:duration-500 before:ease-out " +
+    "before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent " +
+    "hover:before:translate-x-[100%]",
   ghost: "text-muted-fg hover:text-fg hover:bg-muted",
   danger: "bg-surface text-danger border border-danger/40 hover:bg-danger-soft",
 };

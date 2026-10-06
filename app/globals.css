@@ -72,6 +72,7 @@
   --animate-slide-in-left: slide-in-left 220ms var(--ease-smooth) both;
   --animate-shimmer: shimmer 1.6s ease-in-out infinite;
   --animate-float: float 4s ease-in-out infinite;
+  --animate-shine: shine 2s ease-in-out infinite;
 
   @keyframes fade-in {
     from { opacity: 0; }
@@ -94,6 +95,11 @@
     25% { transform: translateY(-10px) translateX(5px); }
     50% { transform: translateY(-5px) translateX(-5px); }
     75% { transform: translateY(-15px) translateX(3px); }
+  }
+  @keyframes shine {
+    0% { transform: translateX(-100%); }
+    20% { transform: translateX(100%); }
+    100% { transform: translateX(100%); }
   }
 }
 
