@@ -19,6 +19,9 @@
   --status-progress: #6b9bff;
   --status-resolved: #4ade80;
   --status-archived: #7c7c75;
+  --scrollbar-track: var(--bg);
+  --scrollbar-thumb: var(--line-soft);
+  --scrollbar-thumb-hover: var(--muted-fg);
   color-scheme: dark;
 }
 
@@ -39,6 +42,9 @@
   --status-progress: #2563eb;
   --status-resolved: #15803d;
   --status-archived: #8a8a82;
+  --scrollbar-track: var(--bg);
+  --scrollbar-thumb: var(--line-soft);
+  --scrollbar-thumb-hover: var(--muted-fg);
   color-scheme: light;
 }
 
@@ -107,6 +113,27 @@
   html {
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border: 2px solid var(--scrollbar-track);
+    border-radius: 999px;
+    background: var(--scrollbar-thumb);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
   }
 
   body {
